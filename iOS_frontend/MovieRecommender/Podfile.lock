@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (4.7.2)
+  - CSV.swift (2.2.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - CSV.swift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CSV.swift
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  CSV.swift: 5bf3338aff82371cb51cc6dc559d7b45a74bab14
+
+PODFILE CHECKSUM: fbc2a94d7ceb0313f4d819eea71d186d68d1fad6
+
+COCOAPODS: 1.5.3
