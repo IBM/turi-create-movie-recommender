@@ -8,6 +8,8 @@
 
 import Foundation
 import CSV
+import Alamofire
+import Alamofire_SwiftyJSON
 
 class MovieData: NSObject, NSCoding {
     
@@ -104,10 +106,21 @@ class MovieHandler {
         return nil
     }
     
-    func searchForMovieWith(movieId: String) -> MovieData? {
+    private func movieWith(movieId: String, rating: Double! = nil) -> MovieData? {
         for (index, value) in data["movieId"]!.enumerated() {
             if value as! String == movieId {
-                return movieWith(index: index)
+                let movie = movieWith(index: index)!
+                movie.rating = rating
+                return movie
+            }
+        }
+        return nil
+    }
+    
+    private func movieWith(tmdbId: String) -> MovieData? {
+        for (index, value) in data["tmdbId"]!.enumerated() {
+            if value as! String == tmdbId {
+                return movieWith(index: index)!
             }
         }
         return nil
@@ -127,6 +140,33 @@ class MovieHandler {
             movies.append(movieWith(index: title_distance[i].1)!)
         }
         return movies
+    }
+    
+    func recommend(_ completionHandler: @escaping ([MovieData]) -> Void) {
+        let preferences = (storage.value(forKey: "favs")! as! [Data]).map { (md) -> MovieData in
+            return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
+        }
+        var movieIds = [String]()
+        var ratings = [Double]()
+        for i in preferences {
+            movieIds.append(i.movieId!)
+            ratings.append(i.rating!)
+        }
+        do {
+            try Alamofire.request(backend + "recommend", method: .post, parameters: ["movieIds": String(data: JSONSerialization.data(withJSONObject: movieIds), encoding: .utf8)!, "ratings": String(data: JSONSerialization.data(withJSONObject: ratings), encoding: .utf8)!]).responseSwiftyJSON(completionHandler: { (backendResponse) in
+                if let recValue = backendResponse.value {
+                    var recommendedMovies = [MovieData]()
+                    for i in zip(recValue["movieId"].arrayObject!, recValue["score"].arrayObject!) {
+                        recommendedMovies.append(self.movieWith(movieId: "\(i.0 as! Int)", rating: i.1 as! Double)!)
+                    }
+                    completionHandler(recommendedMovies)
+                } else {
+                    print("Unable to provide recommendations.")
+                }
+            })
+        } catch {
+            print("Unable to provide recommendations.")
+        }
     }
     
 }

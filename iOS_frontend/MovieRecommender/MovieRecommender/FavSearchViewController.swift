@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import Alamofire_SwiftyJSON
 
 let storage = UserDefaults.standard
 
@@ -49,6 +51,16 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
         movieTable.reloadData()
     }
     
+    @IBAction func recommend() {
+        searching = false
+        movies.recommend({ (recommendations) in
+            self.ratingData = recommendations
+            DispatchQueue.main.async {
+                self.movieTable.reloadData()
+            }
+        })
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         search()
@@ -81,6 +93,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
         cell.movieTitle.text = cleanedTitle
         cell.movieYear.text = String(year)
         cell.movieTMBDid = searching ? currentMovieData[indexPath.row].tmdbId : ratingData[indexPath.row].tmdbId
+        cell.movieId = searching ? currentMovieData[indexPath.row].movieId : ratingData[indexPath.row].movieId
         if !searching {
             cell.ratingButton1.isHidden = true
             cell.ratingButton2.isHidden = true
