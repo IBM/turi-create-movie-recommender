@@ -9,4 +9,11 @@ fi
 echo "Downloading complete, inflating..."
 unzip ml-latest.zip
 
+echo "Inflation complete, deleting ZIP..."
+rm ml-latest.zip
+
+echo "Organizing files..."
+mv ml-latest/movies.csv ../iOS_frontend/MovieRecommender/MovieRecommender/
+mv ml-latest/links.csv ../iOS_frontend/MovieRecommender/MovieRecommender/
+
 echo "Setup complete."
