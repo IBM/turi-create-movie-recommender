@@ -3,4 +3,6 @@ target 'MovieRecommender' do
   use_frameworks!
   pod "Alamofire"
   pod "CSV.swift"
+  pod "SwiftyJSON"
+  pod "Alamofire-SwiftyJSON"
 end

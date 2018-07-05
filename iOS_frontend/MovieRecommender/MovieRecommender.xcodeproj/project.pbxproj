@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		010AD8AF20EDAFE000BE3AD8 /* links.csv in Resources */ = {isa = PBXBuildFile; fileRef = 010AD8AE20EDAFE000BE3AD8 /* links.csv */; };
+		0167B5F420EE561300847F07 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0167B5F320EE561300847F07 /* StringExtensions.swift */; };
+		0167B5F620EE60AE00847F07 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0167B5F520EE60AE00847F07 /* MovieTableViewCell.swift */; };
 		019DB81520EDA138007133C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DB81420EDA138007133C0 /* AppDelegate.swift */; };
 		019DB81A20EDA138007133C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 019DB81820EDA138007133C0 /* Main.storyboard */; };
 		019DB81C20EDA13A007133C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 019DB81B20EDA13A007133C0 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		010AD8AE20EDAFE000BE3AD8 /* links.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = links.csv; sourceTree = "<group>"; };
+		0167B5F320EE561300847F07 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		0167B5F520EE60AE00847F07 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		019DB81120EDA138007133C0 /* MovieRecommender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		019DB81420EDA138007133C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		019DB81920EDA138007133C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,7 +74,9 @@
 				019DB81420EDA138007133C0 /* AppDelegate.swift */,
 				01B4762520EDAAB90067351B /* movies.csv */,
 				010AD8AE20EDAFE000BE3AD8 /* links.csv */,
+				0167B5F320EE561300847F07 /* StringExtensions.swift */,
 				019DB82820EDA386007133C0 /* MovieHandler.swift */,
+				0167B5F520EE60AE00847F07 /* MovieTableViewCell.swift */,
 				019DB82620EDA262007133C0 /* FavSearchViewController.swift */,
 				019DB81820EDA138007133C0 /* Main.storyboard */,
 				019DB81B20EDA13A007133C0 /* Assets.xcassets */,
@@ -194,12 +200,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieRecommender/Pods-MovieRecommender-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -213,7 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0167B5F620EE60AE00847F07 /* MovieTableViewCell.swift in Sources */,
 				019DB82720EDA262007133C0 /* FavSearchViewController.swift in Sources */,
+				0167B5F420EE561300847F07 /* StringExtensions.swift in Sources */,
 				019DB81520EDA138007133C0 /* AppDelegate.swift in Sources */,
 				019DB82920EDA386007133C0 /* MovieHandler.swift in Sources */,
 			);

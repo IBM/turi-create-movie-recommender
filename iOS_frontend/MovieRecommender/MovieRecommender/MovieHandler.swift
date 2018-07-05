@@ -11,15 +11,15 @@ import CSV
 
 class MovieHandler {
     
-    static var shared = MovieHandler()
-    
-    var data: [String: [Any]] = ["movieId": [], "title": [], "imdbId": []]
+    var data: [String: [Any]] = ["movieId": [], "title": [], "tmdbId": []]
     
     var backend = "https://movierecommend.ngrok.io/"
     
     init() {
         if let movieIndex = storage.value(forKey: "movieIndex") {
+            print("Loading movie index data from defaults...")
             data = movieIndex as! [String: [Any]]
+            print("Done loading movie index data...")
         } else {
             print("It seems like this is first time you're running this application. Please wait for a few moments as the movie database is indexed.")
             if let moviesCSVFile = Bundle.main.path(forResource: "movies", ofType: "csv") {
@@ -37,7 +37,7 @@ class MovieHandler {
                                         } else {
                                             data["movieId"]!.append(moviesRow[0])
                                             data["title"]!.append(moviesRow[1])
-                                            data["imdbId"]!.append(linksRow[1])
+                                            data["tmdbId"]!.append(linksRow[2])
                                         }
                                     } else {
                                         print("Problem with movie/link parsing! Aborting data loop!")
@@ -63,6 +63,38 @@ class MovieHandler {
             storage.synchronize()
             print("Movie database indexing is complete. All subsequent runs will be much faster.")
         }
+    }
+    
+    private func movieWith(index: Int) -> (movieId: String, title: String, tmdbId: String)? {
+        if (0..<data["movieId"]!.count).contains(index) {
+            return (movieId: data["movieId"]![index] as! String, title: data["title"]![index] as! String, tmdbId: data["tmdbId"]![index] as! String)
+        }
+        return nil
+    }
+    
+    func searchForMovieWith(movieId: String) -> (movieId: String, title: String, tmdbId: String)? {
+        for (index, value) in data["movieId"]!.enumerated() {
+            if value as! String == movieId {
+                return movieWith(index: index)
+            }
+        }
+        return nil
+    }
+    
+    func searchForMovieWith(title: String, k: Int = 10) -> [(movieId: String, title: String, tmdbId: String)] {
+        var title_distance = [(Double, Int)]()
+        for (index, value) in data["title"]!.enumerated() {
+            title_distance.append((Double(title.lowercased().distance(to: (value as! String).lowercased())), index))
+            if (value as! String).lowercased().contains(title.lowercased()) {
+                title_distance[title_distance.count-1].0 = title_distance.last!.0 / 1.5
+            }
+        }
+        title_distance.sort(by: {$0.0 < $1.0})
+        var movies = [(movieId: String, title: String, tmdbId: String)]()
+        for i in 0..<k {
+            movies.append(movieWith(index: title_distance[i].1)!)
+        }
+        return movies
     }
     
 }
