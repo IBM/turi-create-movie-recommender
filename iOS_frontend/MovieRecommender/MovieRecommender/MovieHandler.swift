@@ -9,6 +9,38 @@
 import Foundation
 import CSV
 
+class MovieData: NSObject, NSCoding {
+    
+    var movieId: String!
+    var title: String!
+    var tmdbId: String!
+    var rating: Double!
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.movieId = aDecoder.decodeObject(forKey: "movieId") as! String
+        self.title = aDecoder.decodeObject(forKey: "title") as! String
+        self.tmdbId = aDecoder.decodeObject(forKey: "tmdbId") as! String
+        self.rating = aDecoder.decodeObject(forKey: "rating")! as! Double
+    }
+    
+    convenience init(movieId: String, title: String, tmdbId: String, rating: Double) {
+        self.init()
+        self.movieId = movieId
+        self.title = title
+        self.tmdbId = tmdbId
+        self.rating = rating
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(movieId, forKey: "movieId")
+        aCoder.encode(title, forKey: "title")
+        aCoder.encode(tmdbId, forKey: "tmdbId")
+        aCoder.encode(rating == nil ? -1.0 : rating, forKey: "rating")
+    }
+    
+}
+
 class MovieHandler {
     
     var data: [String: [Any]] = ["movieId": [], "title": [], "tmdbId": []]
@@ -65,14 +97,14 @@ class MovieHandler {
         }
     }
     
-    private func movieWith(index: Int) -> (movieId: String, title: String, tmdbId: String)? {
+    private func movieWith(index: Int) -> MovieData? {
         if (0..<data["movieId"]!.count).contains(index) {
-            return (movieId: data["movieId"]![index] as! String, title: data["title"]![index] as! String, tmdbId: data["tmdbId"]![index] as! String)
+            return MovieData(movieId: data["movieId"]![index] as! String, title: data["title"]![index] as! String, tmdbId: data["tmdbId"]![index] as! String, rating: -1.0)
         }
         return nil
     }
     
-    func searchForMovieWith(movieId: String) -> (movieId: String, title: String, tmdbId: String)? {
+    func searchForMovieWith(movieId: String) -> MovieData? {
         for (index, value) in data["movieId"]!.enumerated() {
             if value as! String == movieId {
                 return movieWith(index: index)
@@ -81,7 +113,7 @@ class MovieHandler {
         return nil
     }
     
-    func searchForMovieWith(title: String, k: Int = 10) -> [(movieId: String, title: String, tmdbId: String)] {
+    func searchForMovieWith(title: String, k: Int = 10) -> [MovieData] {
         var title_distance = [(Double, Int)]()
         for (index, value) in data["title"]!.enumerated() {
             title_distance.append((Double(title.lowercased().distance(to: (value as! String).lowercased())), index))
@@ -90,7 +122,7 @@ class MovieHandler {
             }
         }
         title_distance.sort(by: {$0.0 < $1.0})
-        var movies = [(movieId: String, title: String, tmdbId: String)]()
+        var movies = [MovieData]()
         for i in 0..<k {
             movies.append(movieWith(index: title_distance[i].1)!)
         }

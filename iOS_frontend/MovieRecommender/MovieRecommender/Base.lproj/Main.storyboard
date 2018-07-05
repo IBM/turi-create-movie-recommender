@@ -42,7 +42,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="110" id="Ede-H4-ga9" customClass="MovieTableViewCell" customModule="MovieRecommender" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ede-H4-ga9" id="DCE-xk-5Nt">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ede-H4-ga9" id="DCE-xk-5Nt" customClass="MovieSearchTableViewCell" customModule="MovieRecommender" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="109.66666666666667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -71,37 +71,58 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH8-Ic-EOC">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH8-Ic-EOC">
                                                     <rect key="frame" x="144" y="40" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="1"/>
+                                                    <connections>
+                                                        <action selector="ratingWithSender:" destination="Ede-H4-ga9" eventType="touchUpInside" id="3Cg-tK-jD6"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60S-Tc-zwM">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60S-Tc-zwM">
                                                     <rect key="frame" x="182" y="40" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="2"/>
+                                                    <connections>
+                                                        <action selector="ratingWithSender:" destination="Ede-H4-ga9" eventType="touchUpInside" id="vnT-gf-Yqo"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQw-dL-YvK">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQw-dL-YvK">
                                                     <rect key="frame" x="220" y="40" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="3"/>
+                                                    <connections>
+                                                        <action selector="ratingWithSender:" destination="Ede-H4-ga9" eventType="touchUpInside" id="HRF-eh-A9M"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzJ-gL-q9K">
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzJ-gL-q9K">
                                                     <rect key="frame" x="258" y="40" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="4"/>
+                                                    <connections>
+                                                        <action selector="ratingWithSender:" destination="Ede-H4-ga9" eventType="touchUpInside" id="Zic-5I-hQw"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Su-rn-71J">
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Su-rn-71J">
                                                     <rect key="frame" x="296" y="40" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="5"/>
+                                                    <connections>
+                                                        <action selector="ratingWithSender:" destination="Ede-H4-ga9" eventType="touchUpInside" id="Pnx-jT-E8a"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="coverPicture" destination="Ofy-Yb-SR9" id="w5T-ej-COV"/>
-                                            <outlet property="movieTitle" destination="2Ks-FT-PVW" id="AmR-ai-zS6"/>
-                                            <outlet property="movieYear" destination="7f6-cb-RtU" id="j8K-yF-sHW"/>
+                                            <outlet property="coverPicture" destination="Ofy-Yb-SR9" id="vuu-vA-IhN"/>
+                                            <outlet property="movieTitle" destination="2Ks-FT-PVW" id="cyb-u1-uFa"/>
+                                            <outlet property="movieYear" destination="7f6-cb-RtU" id="joN-9d-EA2"/>
+                                            <outlet property="ratingButton1" destination="pH8-Ic-EOC" id="jWG-Xu-8Vr"/>
+                                            <outlet property="ratingButton2" destination="60S-Tc-zwM" id="xCs-vG-AQV"/>
+                                            <outlet property="ratingButton3" destination="eQw-dL-YvK" id="jcD-X4-88S"/>
+                                            <outlet property="ratingButton4" destination="uzJ-gL-q9K" id="I7P-pg-nq2"/>
+                                            <outlet property="ratingButton5" destination="5Su-rn-71J" id="e7Q-Gv-jGf"/>
+                                            <outlet property="ratingLabel" destination="YWc-1z-7SQ" id="ZLZ-Pp-oiU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -116,7 +137,7 @@
                                 <state key="normal" title="What should I watch?"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for movies here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IBR-ot-IeZ">
-                                <rect key="frame" x="16" y="97" width="343" height="30"/>
+                                <rect key="frame" x="16" y="97" width="299" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -125,6 +146,14 @@
                                     <outlet property="delegate" destination="Hsy-ma-03A" id="THD-Qn-vxO"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IP0-fS-mgj">
+                                <rect key="frame" x="323" y="97" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clearSearch" destination="Hsy-ma-03A" eventType="touchUpInside" id="D2i-WT-EFO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1gf-3J-y3h"/>

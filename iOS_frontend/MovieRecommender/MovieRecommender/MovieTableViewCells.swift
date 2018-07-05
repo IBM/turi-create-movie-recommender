@@ -16,8 +16,16 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet var coverPicture: UIImageView!
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var movieYear: UILabel!
+    @IBOutlet var ratingLabel: UILabel!
+    
+    @IBOutlet var ratingButton1: UIButton!
+    @IBOutlet var ratingButton2: UIButton!
+    @IBOutlet var ratingButton3: UIButton!
+    @IBOutlet var ratingButton4: UIButton!
+    @IBOutlet var ratingButton5: UIButton!
     
     var movieTMBDid = ""
+    var movieId = ""
     
     let img_baseurl = "https://image.tmdb.org/t/p/w185/"
     let tmdb_baseurl = "https://api.themoviedb.org/3/movie/"
@@ -36,6 +44,17 @@ class MovieTableViewCell: UITableViewCell {
                 })
             }
         }
+    }
+    
+    @IBAction func rating(sender: UIButton) {
+        var userFavs = (storage.value(forKey: "favs") as! [Data]).map { (md) -> MovieData in
+            return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
+        }
+        userFavs.append(MovieData(movieId: movieId, title: movieTitle.text!, tmdbId: self.movieTMBDid, rating: Double(sender.tag)))
+        storage.set(userFavs.map({ (md) -> Data in
+            return NSKeyedArchiver.archivedData(withRootObject: md)
+        }), forKey: "favs")
+        storage.synchronize()
     }
     
 }
