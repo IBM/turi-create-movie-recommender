@@ -17,6 +17,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     @IBOutlet var searchBar: UITextField!
     @IBOutlet var searchIndicator: UIActivityIndicatorView!
     @IBOutlet var movieTable: UITableView!
+    @IBOutlet var statusLabel: UILabel!
     
     var ratingData = [MovieData]()
     var currentMovieData = [MovieData]()
@@ -51,6 +52,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
                 self.searchIndicator.isHidden = true
                 self.searchIndicator.stopAnimating()
                 self.searching = true
+                self.statusLabel.text = "Search results"
                 self.movieTable.reloadData()
             }
         }
@@ -61,6 +63,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
         ratingData = (storage.value(forKey: "favs")! as! [Data]).map { (md) -> MovieData in
             return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
         }
+        statusLabel.text = "My favourites"
         movieTable.reloadData()
     }
     
@@ -69,6 +72,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
         movies.recommend({ (recommendations) in
             self.currentMovieData = recommendations
             DispatchQueue.main.async {
+                self.statusLabel.text = "My recommendations"
                 self.movieTable.reloadData()
             }
         })

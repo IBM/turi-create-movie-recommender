@@ -50,6 +50,12 @@ class MovieTableViewCell: UITableViewCell {
         var userFavs = (storage.value(forKey: "favs") as! [Data]).map { (md) -> MovieData in
             return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
         }
+        for i in 0..<userFavs.count {
+            if userFavs[i].movieId == movieId {
+                userFavs.remove(at: i)
+                break
+            }
+        }
         userFavs.append(MovieData(movieId: movieId, title: movieTitle.text!, tmdbId: self.movieTMBDid, rating: Double(sender.tag)))
         storage.set(userFavs.map({ (md) -> Data in
             return NSKeyedArchiver.archivedData(withRootObject: md)
