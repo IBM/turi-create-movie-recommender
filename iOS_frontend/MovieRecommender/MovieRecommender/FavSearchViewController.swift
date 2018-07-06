@@ -38,7 +38,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     }
     
     func search() {
-        currentMovieData = movies.searchForMovieWith(title: searchBar.text!)
+        currentMovieData = movies.splitThreadedSearchForMovieWith(title: searchBar.text!)
         searching = true
         movieTable.reloadData()
     }

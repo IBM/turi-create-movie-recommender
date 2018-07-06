@@ -17,6 +17,8 @@
 		019DB82720EDA262007133C0 /* FavSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DB82620EDA262007133C0 /* FavSearchViewController.swift */; };
 		019DB82920EDA386007133C0 /* MovieHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DB82820EDA386007133C0 /* MovieHandler.swift */; };
 		01B4762620EDAAB90067351B /* movies.csv in Resources */ = {isa = PBXBuildFile; fileRef = 01B4762520EDAAB90067351B /* movies.csv */; };
+		01FC5C0920EFAA3A0040F91D /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC5C0820EFAA3A0040F91D /* ArrayExtensions.swift */; };
+		01FC5C0B20EFABA50040F91D /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC5C0A20EFABA50040F91D /* SynchronizedArray.swift */; };
 		1DE89F2E678943EBAD3F6FC6 /* Pods_MovieRecommender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EABD42E28A7110D2804714B /* Pods_MovieRecommender.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		019DB82620EDA262007133C0 /* FavSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavSearchViewController.swift; sourceTree = "<group>"; };
 		019DB82820EDA386007133C0 /* MovieHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHandler.swift; sourceTree = "<group>"; };
 		01B4762520EDAAB90067351B /* movies.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = movies.csv; sourceTree = "<group>"; };
+		01FC5C0820EFAA3A0040F91D /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		01FC5C0A20EFABA50040F91D /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		2EABD42E28A7110D2804714B /* Pods_MovieRecommender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieRecommender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D6F9CCE9ED5E851783E4380 /* Pods-MovieRecommender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommender.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommender/Pods-MovieRecommender.debug.xcconfig"; sourceTree = "<group>"; };
 		D5A0F7F9E8518E05489D4933 /* Pods-MovieRecommender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommender.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommender/Pods-MovieRecommender.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				01B4762520EDAAB90067351B /* movies.csv */,
 				010AD8AE20EDAFE000BE3AD8 /* links.csv */,
 				0167B5F320EE561300847F07 /* StringExtensions.swift */,
+				01FC5C0A20EFABA50040F91D /* SynchronizedArray.swift */,
+				01FC5C0820EFAA3A0040F91D /* ArrayExtensions.swift */,
 				019DB82820EDA386007133C0 /* MovieHandler.swift */,
 				0167B5F520EE60AE00847F07 /* MovieTableViewCells.swift */,
 				019DB82620EDA262007133C0 /* FavSearchViewController.swift */,
@@ -224,6 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0167B5F620EE60AE00847F07 /* MovieTableViewCells.swift in Sources */,
+				01FC5C0B20EFABA50040F91D /* SynchronizedArray.swift in Sources */,
+				01FC5C0920EFAA3A0040F91D /* ArrayExtensions.swift in Sources */,
 				019DB82720EDA262007133C0 /* FavSearchViewController.swift in Sources */,
 				0167B5F420EE561300847F07 /* StringExtensions.swift in Sources */,
 				019DB81520EDA138007133C0 /* AppDelegate.swift in Sources */,
@@ -373,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 998XWVFVMR;
 				INFOPLIST_FILE = MovieRecommender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -391,6 +400,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 998XWVFVMR;
 				INFOPLIST_FILE = MovieRecommender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

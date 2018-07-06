@@ -157,6 +157,10 @@
                                     <action selector="clearSearch" destination="Hsy-ma-03A" eventType="touchUpInside" id="D2i-WT-EFO"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qau-wB-LRi">
+                                <rect key="frame" x="16" y="130" width="299" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1gf-3J-y3h"/>

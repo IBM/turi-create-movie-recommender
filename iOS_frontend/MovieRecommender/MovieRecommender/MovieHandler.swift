@@ -142,6 +142,41 @@ class MovieHandler {
         return movies
     }
     
+    func splitThreadedSearchForMovieWith(title: String, k: Int = 10) -> [MovieData] {
+        let all_title_distance = SynchronizedArray<[(Double, Int)]>()
+        let distanceCalcGroup = DispatchGroup()
+        let num_chunks = 2
+        let splitTitle = data["title"]!.chunked(into: data["title"]!.count / num_chunks)
+        for i in 0..<splitTitle.count {
+            distanceCalcGroup.enter()
+            let currentTitleDistance = SynchronizedArray<(Double, Int)>()
+            DispatchQueue.global(qos: .userInitiated).async {
+                for (index, value) in (splitTitle[i] as! [String]).enumerated() {
+                    var distance = (Double(title.lowercased().distance(to: value.lowercased())), index)
+                    if value.lowercased().contains(title.lowercased()) {
+                        distance.0 /= 4
+                    }
+                    currentTitleDistance.append(distance)
+                }
+                all_title_distance.append(Array(currentTitleDistance.sorted(by: {$0.0 < $1.0}).prefix(upTo: (0..<currentTitleDistance.count).contains(k) ? k : currentTitleDistance.count)))
+                distanceCalcGroup.leave()
+            }
+        }
+        distanceCalcGroup.wait()
+        var flatTitleDistance = [(Double, Int)]()
+        for i in all_title_distance.sorted(by: { _,_ in return true }) { // This is a very inelegant solution to convert a Synchronized Array to an Array. This should be replaced.
+            for j in i {
+                flatTitleDistance.append(j)
+            }
+        }
+        flatTitleDistance.sort(by: { $0.0 < $1.0 })
+        var movies = [MovieData]()
+        for i in 0..<k {
+            movies.append(movieWith(index: flatTitleDistance[i].1)!)
+        }
+        return movies
+    }
+    
     func recommend(_ completionHandler: @escaping ([MovieData]) -> Void) {
         let preferences = (storage.value(forKey: "favs")! as! [Data]).map { (md) -> MovieData in
             return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
