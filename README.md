@@ -30,24 +30,24 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Featured technologies
 
-* [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+* [Artificial Intelligence](https://www.ibm.com/products/data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
 * [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 
 ## Prerequisites
 
 The following are prerequisites to start developing this application:
 
-* Xcode
-* Turi Create (5.0 Beta 2)
-* Cocoapods
-* Python 2.7 & PIP
-* Flask
-* Jupyter
-* ngrok
+* [Xcode](https://developer.apple.com/xcode/)
+* [Turi Create (5.0 Beta 2)](http://github.com/apple/turicreate)
+* [Cocoapods](http://cocoapods.org)
+* [Python 2.7](https://www.python.org/) & [PIP](https://pypi.org/project/pip/)
+* [Flask](http://flask.pocoo.org)
+* [Jupyter](http://jupyter.org)
+* [ngrok](http://ngrok.com)
 
 # Steps
 
-(NOTE: I still need to add screenshots/pictures to all the steps!)
+(TODO: I still need to add screenshots/pictures to all the steps!)
 
 1. [Download and organize the latest MovieLens dataset](#1-download-and-organize-the-latest-movielens-dataset)
 2. [Train the Turi Create Recommender model](#2-train-the-turi-create-recommender-model)
@@ -56,20 +56,20 @@ The following are prerequisites to start developing this application:
 
 ### 1. Download and organize the latest MovieLens dataset
 
-There's a script available in the root directory of this repository, called `setup.sh`. Run this script - it'll download the movielens data, and organize it, for you.
+There's a script available in the root directory of this repository, called `setup.sh`. Run this script, which will download the movielens data & organize it for you.
 
 ### 2. Train the Turi Create Recommender model
 
 In order for the recommendations to work, you need a trained model. Turi Create is a Python package that will train this model for you.
 
-Go ahead and start your Jupyter Notebooks. In the `local_model_training` folder, open the `TrainRecommendationModel.ipynb` notebook. Run the notebook, and once it's done executing, you're going to have a folder called `movie_rec`, which contains the trained Turi Create model. Unlike other machine learning libraries, Turi Create does not use files for models - it uses folders.
+Go ahead and start your Jupyter Notebooks. In the `local_model_training` folder, open the `TrainRecommendationModel.ipynb` notebook. Run the notebook, and once it's done executing, you're going to have a folder called `movie_rec`, which contains the trained Turi Create model. Unlike other machine learning libraries, Turi Create does not use files for models; instead, it uses folders.
 
 ### 4. Run the backend
 
-Turi Create supports exporting recommender models to CoreML, so they can run on-device, and there's no need for a backend. However, it only works with iOS 12 and above (which is currently in Beta), and there's an [issue with linking the custom model framework](https://github.com/apple/turicreate/issues/799). Therefore, this code pattern will use a backend that takes requests from the iOS Application, and runs the users' preferences through the turi create model, to return predictions as to what the user would like to watch next.
+Turi Create supports exporting recommender models to CoreML, so they can run on-device, and there's no need for a backend. However, it only works with iOS 12 and above (which is currently in Beta), and there's an [issue with linking the custom model framework](https://github.com/apple/turicreate/issues/799). Therefore, this code pattern will use a backend that takes requests from the iOS Application, and runs the users' preferences through the Turi Create model, to return predictions as to what the user would like to watch next.
 
 First, copy the `movie_rec` folder (your trained model) from `local_model_training`, and paste it into the `serverside_prediction_api` folder. Once that's done, run the following command from a terminal window within that folder: `FLASK_APP=backend.py flask run`. This will run the `backend.py` file, which is the flask application.
 
 ### 5. Deploy the iOS app
 
-Finally, you can run the front-end of the application. Go ahead into the `iOS_frontend/MovieRecommender` folder, and open the `xcworkspace` file. Once you're there, run the application by hitting `Cmd+R` or clicking the run button beside the window controls on the top left of Xcode.
+Finally, you can run the front-end of the application. Navigate to the `iOS_frontend/MovieRecommender` folder, and open the `xcworkspace` file. Once you're there, run the application by hitting <kbd>&#8984;</kbd> + <kbd>R</kbd> or clicking the run button beside the window controls on the top left of Xcode.
