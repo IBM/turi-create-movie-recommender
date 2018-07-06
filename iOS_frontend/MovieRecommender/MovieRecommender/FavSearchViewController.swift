@@ -54,6 +54,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
                 self.searching = true
                 self.statusLabel.text = "Search results"
                 self.movieTable.reloadData()
+                self.movieTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -64,7 +65,9 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
             return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
         }
         statusLabel.text = "My favourites"
+        searchBar.text = ""
         movieTable.reloadData()
+        movieTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     @IBAction func recommend() {
@@ -74,6 +77,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
             DispatchQueue.main.async {
                 self.statusLabel.text = "My recommendations"
                 self.movieTable.reloadData()
+                self.movieTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         })
     }
@@ -145,6 +149,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
                 storage.synchronize()
             }
             tableView.reloadData()
+            self.movieTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
         return [delete]
     }
