@@ -15,6 +15,7 @@ let storage = UserDefaults.standard
 class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var searchBar: UITextField!
+    @IBOutlet var searchIndicator: UIActivityIndicatorView!
     @IBOutlet var movieTable: UITableView!
     
     var ratingData = [MovieData]()
@@ -25,6 +26,7 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchIndicator.isHidden = true
         if let favourites = storage.value(forKey: "favs") {
             ratingData = (favourites as! [Data]).map { (md) -> MovieData in
                 return NSKeyedUnarchiver.unarchiveObject(with: md) as! MovieData
@@ -38,9 +40,20 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     }
     
     func search() {
-        currentMovieData = movies.splitThreadedSearchForMovieWith(title: searchBar.text!)
-        searching = true
-        movieTable.reloadData()
+        self.view.isUserInteractionEnabled = false
+        searchIndicator.isHidden = false
+        searchIndicator.startAnimating()
+        let query = self.searchBar.text!
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.currentMovieData = self.movies.splitThreadedSearchForMovieWith(title: query)
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.searchIndicator.isHidden = true
+                self.searchIndicator.stopAnimating()
+                self.searching = true
+                self.movieTable.reloadData()
+            }
+        }
     }
     
     @IBAction func clearSearch() {
