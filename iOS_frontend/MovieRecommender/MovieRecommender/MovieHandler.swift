@@ -131,7 +131,7 @@ class MovieHandler {
         for (index, value) in data["title"]!.enumerated() {
             title_distance.append((Double(title.lowercased().distance(to: (value as! String).lowercased())), index))
             if (value as! String).lowercased().contains(title.lowercased()) {
-                title_distance[title_distance.count-1].0 = title_distance.last!.0 / 1.5
+                title_distance[title_distance.count-1].0 = title_distance.last!.0 / 4
             }
         }
         title_distance.sort(by: {$0.0 < $1.0})

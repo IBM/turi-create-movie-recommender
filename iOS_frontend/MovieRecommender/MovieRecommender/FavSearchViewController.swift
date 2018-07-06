@@ -52,9 +52,9 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     }
     
     @IBAction func recommend() {
-        searching = false
+        searching = true
         movies.recommend({ (recommendations) in
-            self.ratingData = recommendations
+            self.currentMovieData = recommendations
             DispatchQueue.main.async {
                 self.movieTable.reloadData()
             }
@@ -73,7 +73,6 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell") as! MovieTableViewCell
-        print(ratingData[0])
         let movieTitle = searching ? currentMovieData[indexPath.row].title! : ratingData[indexPath.row].title!
         var titleParts = movieTitle.split(separator: " ")
         var year = "N/A"
@@ -119,8 +118,16 @@ class FavSearchViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (_, actionIndexPath) in
-            self.currentMovieData.remove(at: actionIndexPath.row)
-            tableView.deleteRows(at: [actionIndexPath], with: .fade)
+            if self.searching {
+                self.currentMovieData.remove(at: actionIndexPath.row)
+            } else {
+                self.ratingData.remove(at: actionIndexPath.row)
+                storage.set(self.ratingData.map({ (md) -> Data in
+                    return NSKeyedArchiver.archivedData(withRootObject: md)
+                }), forKey: "favs")
+                storage.synchronize()
+            }
+            tableView.reloadData()
         }
         return [delete]
     }
