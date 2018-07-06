@@ -24,15 +24,16 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Included components
 
-* [Turi Create](): is a task-focused deep learning library - allowing you to build intelligent apps by focusing on the machine learning use case, not the algorithm.
-* [Flask](): is a micro web framework.
-* [ngrok](): allows you to open an HTTPS tunnel into your REST API.
-
-## Featured technologies
-
-* ABCD
-* EFGH
+* [Turi Create](https://github.com/apple/turicreate): is a task-focused deep learning library - allowing you to build intelligent apps by focusing on the machine learning use case, not the algorithm.
+* [Flask](http://flask.pocoo.org/): is a micro web framework.
+* [ngrok](http://ngrok.com/): allows you to open an HTTPS tunnel into your REST API.
 
 ## Prerequisites:
 
+The following are prerequisites to start developing this application:
 
+* Xcode
+* Turi Create (5.0 Beta 2)
+* Cocoapods
+* Python 2.7 & PIP
+* Jupyter
