@@ -8,8 +8,6 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Use Flask to expose a REST API that provides recommendations based off of users' past movie ratings
 * Call that REST API from Swift to create a GUI around the recommender
 
-[ARCHITECTURE IMAGE COMES HERE]
-
 ## Flow
 
 1. Download the MovieLens latest dataset (at the time of writing, there are 26,000,000 rows of data).
@@ -21,6 +19,8 @@ When the reader has completed this Code Pattern, they will understand how to:
 7. The REST API will provide the iOS App with a list of movies and their scores.
 8. The iOS App will display those movies and scores.
 9. User will watch & rate those movies, and go back to step 6, getting better recommendations every time.
+
+![](images/tcmr_pattern_arch_digram.png)
 
 ## Included components
 
