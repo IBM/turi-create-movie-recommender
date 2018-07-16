@@ -47,8 +47,6 @@ The following are prerequisites to start developing this application:
 
 # Steps
 
-(TODO: I still need to add screenshots/pictures to all the steps!)
-
 1. [Download and organize the latest MovieLens dataset](#1-download-and-organize-the-latest-movielens-dataset)
 2. [Train the Turi Create Recommender model](#2-train-the-turi-create-recommender-model)
 3. [Run the backend](#3-run-the-backend)
@@ -56,7 +54,11 @@ The following are prerequisites to start developing this application:
 
 ### 1. Download and organize the latest MovieLens dataset
 
-There's a script available in the root directory of this repository, called `setup.sh`. Run this script, which will download the movielens data & organize it for you.
+In order to get the MovieLens dataset setup, run the following script:
+
+`$ sh setup.sh`
+
+It'll download the data and move the files to their relevant locations.
 
 ### 2. Train the Turi Create Recommender model
 
@@ -68,8 +70,20 @@ Go ahead and start your Jupyter Notebooks. In the `local_model_training` folder,
 
 Turi Create supports exporting recommender models to CoreML, so they can run on-device, and there's no need for a backend. However, it only works with iOS 12 and above (which is currently in Beta), and there's an [issue with linking the custom model framework](https://github.com/apple/turicreate/issues/799). Therefore, this code pattern will use a backend that takes requests from the iOS Application, and runs the users' preferences through the Turi Create model, to return predictions as to what the user would like to watch next.
 
-First, copy the `movie_rec` folder (your trained model) from `local_model_training`, and paste it into the `serverside_prediction_api` folder. Once that's done, run the following command from a terminal window within that folder: `FLASK_APP=backend.py flask run`. This will run the `backend.py` file, which is the flask application.
+First, copy the `movie_rec` folder (your trained model) from `local_model_training`, and paste it into the `serverside_prediction_api` folder. Once that's done, run the following command from a terminal window within that folder:
+
+`FLASK_APP=backend.py flask run`
+
+This will run the `backend.py` file, which is the flask application.
+
+Next, open up a tunnel to the backend with [ngrok](https://www.ngrok.com), so your iOS App can access it:
+
+`ngrok http 5000` (change 5000 to whichever port you chose with Flask)
 
 ### 5. Deploy the iOS app
 
-Finally, you can run the front-end of the application. Navigate to the `iOS_frontend/MovieRecommender` folder, and open the `xcworkspace` file. Once you're there, run the application by hitting <kbd>&#8984;</kbd> + <kbd>R</kbd> or clicking the run button beside the window controls on the top left of Xcode.
+Finally, you can run the front-end of the application.
+
+Start by pointing your iOS app to the backend. Go to the `iOS_Frontend/MovieRecommender/MovieRecommender/MovieHandler.swift` file, and change the `backend` constant to the link of the ngrok tunnel.
+
+Then, in the `iOS_frontend/MovieRecommender` folder, and open the `xcworkspace` file. Once you're there, run the application by hitting <kbd>&#8984;</kbd> + <kbd>R</kbd> or clicking the run button beside the window controls on the top left of Xcode.
