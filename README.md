@@ -20,7 +20,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 8. The iOS App will display those movies and scores.
 9. User will watch & rate those movies, and go back to step 6, getting better recommendations every time.
 
-![](images/tcmr_pattern_arch_digram.png)
+![](images/tcmr_pattern_arch_diagram.png)
 
 ## Included components
 
