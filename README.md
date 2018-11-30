@@ -87,3 +87,9 @@ Finally, you can run the front-end of the application.
 Start by pointing your iOS app to the backend. Go to the `iOS_Frontend/MovieRecommender/MovieRecommender/MovieHandler.swift` file, and change the `backend` constant to the link of the ngrok tunnel.
 
 Then, in the `iOS_frontend/MovieRecommender` folder, and open the `xcworkspace` file. Once you're there, run the application by hitting <kbd>&#8984;</kbd> + <kbd>R</kbd> or clicking the run button beside the window controls on the top left of Xcode.
+
+## License
+
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+
+[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
